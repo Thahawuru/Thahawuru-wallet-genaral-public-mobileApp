@@ -126,7 +126,7 @@ const TabsLayout = () => {
             presentation: "modal",
           }}
         />
-        <Tabs.Screen
+        {/* <Tabs.Screen
           name="scandetails"
           options={{
             title: "Scan Details",
@@ -134,7 +134,7 @@ const TabsLayout = () => {
             href: null,
             presentation: "modal",
           }}
-        />
+        /> */}
       </Tabs>
       <StatusBar style="light" backgroundColor={"#001d3d"} />
     </>
