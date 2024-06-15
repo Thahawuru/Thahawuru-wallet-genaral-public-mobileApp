@@ -14,7 +14,7 @@ const qrpage = () => {
   return (
     <SafeAreaView>
       <View className="flex justify-center items-center">
-        <Header></Header>
+        <Header back={true}></Header>
         <View className="w-[95%] -translate-y-10">
           <Card color="#fff">
             <View className="flex justify-center items-center">

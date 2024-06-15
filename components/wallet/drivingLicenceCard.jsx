@@ -9,7 +9,7 @@ import { Ionicons } from "@expo/vector-icons";
 const passportCard = () => {
   const { getDrivingLicence } = useCards();
   const [show, setShow] = useState(false);
-  const dl = getDrivingLicence();
+  const license = getDrivingLicence();
 
   return (
     <Card color={"#fff"}>
@@ -19,7 +19,7 @@ const passportCard = () => {
             <Text className="text-lg font-semibold">Driving Licence</Text>
             {!show && (
               <Text className="text-md font-semibold">
-                Licence No : {dl.no}
+                Licence No : {license.no}
               </Text>
             )}
             {!show && (
@@ -28,20 +28,20 @@ const passportCard = () => {
 
             {show && (
               <View>
-                <Tag title="No"> {dl.no}</Tag>
-                <Tag title="Name"> {dl.name}</Tag>
-                <Tag title="Date of Birth"> {dl.dob}</Tag>
-                <Tag title="Date of Issue"> {dl.doi}</Tag>
-                <Tag title="Date of Expiary"> {dl.doe}</Tag>
-                <Tag title="Blood Group"> {dl.bloodGroup}</Tag>
-                {dl.restrictions && (
+                <Tag title="No"> {license.no}</Tag>
+                <Tag title="Name"> {license.name}</Tag>
+                <Tag title="Date of Birth"> {license.dob}</Tag>
+                <Tag title="Date of Issue"> {license.doi}</Tag>
+                <Tag title="Date of Expiary"> {license.doe}</Tag>
+                <Tag title="Blood Group"> {license.bloodGroup}</Tag>
+                {license.restrictions && (
                   <Tag title="Restrictions">
                     <Ionicons size={24} name="glasses-outline"></Ionicons>
                   </Tag>
                 )}
                 <Tag title="Vehicle Categories">
                   {" "}
-                  {dl.categories.join(", ")}
+                  {license.categories.join(", ")}
                 </Tag>
               </View>
             )}

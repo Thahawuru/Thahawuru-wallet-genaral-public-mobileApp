@@ -1,15 +1,13 @@
 import { View, Text, Image, TouchableWithoutFeedback } from "react-native";
 import { useState } from "react";
 import Card from "../UI/customCard";
-import { useCards } from "../../api/useCards";
 import userphoto from "../../assets/images/userphoto.jpg";
 import { MaterialIcons } from "@expo/vector-icons";
 import Tag from "../itemTag";
 
-const nicCard = () => {
-  const { getNIC } = useCards();
+const nicCard = ({nic}) => {
   const [show, setShow] = useState(false);
-  const nic = getNIC();
+
 
   return (
     <Card color={"#fff"}>

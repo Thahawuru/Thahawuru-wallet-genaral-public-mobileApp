@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
+import { Text, View, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import { CameraView, Camera } from "expo-camera";
 import CameraOverlay from "../../components/UI/cameraOverlay";
 import CustomButton from "../../components/UI/customButton";
-
+import CustomModal from "../../components/UI/modal";
+import { router } from "expo-router";
 
 export default function App() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [scannedData, setScannedData] = useState("");
+  const [verified, setVerified] = useState(false);
 
   useEffect(() => {
     const getCameraPermissions = async () => {
@@ -20,7 +24,25 @@ export default function App() {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    if(data){
+      setScannedData(
+        `Wallet ID ${data} has been scanned!`
+      );
+    setVerified(true)
+    }
+    setModalVisible(true);
+  };
+  const handleCloseModal = () => {
+    setModalVisible(false);
+    setVerified(false);
+    // setScanned(false);
+  };
+  const handleActionModal = () => {
+    setModalVisible(false);
+    setScanned(false);
+    router.push('/scandetails');
+
   };
 
   if (hasPermission === null) {
@@ -31,22 +53,35 @@ export default function App() {
   }
 
   return (
+    <TouchableWithoutFeedback onPress={handleCloseModal}>
+
     <View className=" relative flex flex-1 justify-center items-center ">
       <CameraView
         onBarcodeScanned={scanned ? undefined : handleBarCodeScanned}
         barcodeScannerSettings={{
           barcodeTypes: ["qr", "pdf417"],
-        }}
-        style={StyleSheet.absoluteFillObject}
-      />
+          }}
+          style={StyleSheet.absoluteFillObject}
+          />
       <CameraOverlay title="Scan Wallet ID" />
+      <CustomModal
+        visible={modalVisible}
+        onClose={handleCloseModal}
+        onAction={handleActionModal}
+        verified={verified}
+        title={scannedData}
+        ></CustomModal>
 
       {scanned && (
         // <Button title={"Tap to Scan Again"} onPress={() => setScanned(false)} />
         <View className="absolute bottom-[10%] w-full flex justify-center items-center">
-          <CustomButton title="Scan Again" handelPress={() => setScanned(false)} />
+          <CustomButton
+            title="Scan Again"
+            handelPress={() => setScanned(false)}
+            />
         </View>
       )}
     </View>
+    </TouchableWithoutFeedback>
   );
 }
