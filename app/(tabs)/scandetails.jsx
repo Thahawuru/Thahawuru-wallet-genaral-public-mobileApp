@@ -10,7 +10,7 @@ import { useCards } from '../../api/useCards'
 const scandetails = () => {
     const { getNIC ,getDrivingLicence,getPassport } = useCards();
     const nic = getNIC();
-    const license = getDrivingLicence();
+    const licence = getDrivingLicence();
     const passport = getPassport();
   return (
 <SafeAreaView>
@@ -23,7 +23,7 @@ const scandetails = () => {
             <NIC nic={nic}></NIC>
           </View>
           <View className='w-[90%] '>
-            <DrivingLicence license={license}></DrivingLicence>
+            <DrivingLicence licence={licence}></DrivingLicence>
           </View>
           <View className='w-[90%] '>
            <Passport passport={passport}></Passport>
