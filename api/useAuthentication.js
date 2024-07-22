@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://192.168.98.74:9000/api/v1";
+const API_URL = "http://192.168.40.74:9000/api/v1";
 
 export const useAuthentication = () => {
   const signup = async (data) => {

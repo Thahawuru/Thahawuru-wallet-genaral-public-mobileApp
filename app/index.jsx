@@ -4,17 +4,20 @@ import image from "../assets/images/tahauru.jpg";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "../components/languageSwitcher";
-
+import { useAuthContext } from "@/hooks/useAuthContext";
 
 const index = () => {
   const { t } = useTranslation();
+  const { user } = useAuthContext();
 
   return (
     <SafeAreaView className="h-full bg-white">
       <ScrollView
-        contentContainerStyle={{ height: "100%", justifyContent: "space-between"}}
+        contentContainerStyle={{
+          height: "100%",
+          justifyContent: "space-between",
+        }}
       >
-   
         <View className="w-full flex-1  justify-center items-center">
           <Image source={image} className="h-[300px] w-[300px]"></Image>
           <View className="">
@@ -24,6 +27,7 @@ const index = () => {
             >
               {t("go")} {/* Use translation key */}
             </Link>
+            <Text>{user?.email}</Text>
           </View>
         </View>
         <View className="w-full flex-[0.1] flex justify-end items-center ">
