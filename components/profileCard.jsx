@@ -9,7 +9,7 @@ import { useAuthContext } from '../hooks/useAuthContext'
 const profileCard = () => {
 
   const { user } = useAuthContext();
-  console.log("user",user);
+
 
 
   return (

@@ -10,8 +10,7 @@ import { faSquareCheck } from "@fortawesome/free-solid-svg-icons/faSquareCheck";
 import i18n from "../i18n";
 import { I18nextProvider } from "react-i18next";
 import { AuthProvider } from "../context/authContext";
-import ProtectedRoute from "../components/protectedRoute";
-import AuthRoute from "../components/authRoute";
+import { useAuthContext } from "@/hooks/useAuthContext";
 
 library.add(fab, faSquareCheck);
 
@@ -37,29 +36,14 @@ export default function RootLayout() {
 
   return (
     <>
-      {/* <Text>Header</Text>
-<Slot></Slot>
-<Text>Footer</Text> */}
       <AuthProvider>
         <I18nextProvider i18n={i18n}>
-          {/* <ProtectedRoute> */}
-              {/* <AuthRoute> */}
-            <Stack>
-                <Stack.Screen
-                  name="index"
-                  options={{ headerShown: false }}
-                ></Stack.Screen>
-                <Stack.Screen
-                  name="(auth)"
-                  options={{ headerShown: false }}
-                ></Stack.Screen>
-              <Stack.Screen
-                name="(tabs)"
-                options={{ headerShown: false }}
-                ></Stack.Screen>
-            </Stack>
-                {/* </AuthRoute> */}
-          {/* </ProtectedRoute> */}
+          <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen
+              name="index"
+              options={{ headerShown: false }}
+            ></Stack.Screen>
+          </Stack>
         </I18nextProvider>
       </AuthProvider>
     </>

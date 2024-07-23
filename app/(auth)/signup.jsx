@@ -29,7 +29,7 @@ const signup = () => {
             <Image source={logo} className="h-[100px] w-[100px] "></Image>
             <View className="flex flex-row justify-center items-center ">
               {/* <Image resizeMode= {'contain'}  source={word} className=" border-2 h-[60px] w-[60px]"></Image> */}
-              <Text className="uppercase mt-5 space-x-1 text-sky-700 font-bold text-xl ">
+              <Text className="uppercase mt-5 space-x-1 text-primary-blue font-bold text-xl ">
                 Signup
               </Text>
             </View>

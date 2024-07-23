@@ -6,7 +6,10 @@ module.exports = {
     extend: {
       fontFamily: {
         SpaceMono: [ "monospace"],
-      }
+      },      
+      colors: {
+        'primary-blue': '#010177df', // Example default color
+      },
     },
   },
   plugins: [],

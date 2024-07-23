@@ -3,10 +3,12 @@ import React from "react";
 import Card from "./UI/customCard";
 import logo from "../assets/images/tahauru-logo.png";
 import QRCode from "react-native-qrcode-svg";
-import { router } from 'expo-router';
+import { router } from "expo-router";
+import { useAuthContext } from "@/hooks/useAuthContext";
 
 const qrCard = () => {
   const wallet = "this-is-tahauru-wallet-id";
+  const { user } = useAuthContext();
 
   const handleModal = () => {
     router.push("/qrpage");
@@ -22,15 +24,15 @@ const qrCard = () => {
           <View className="w-full flex justify-center items-center">
             <QRCode
               size={200}
-              value={wallet}
+              value={user?.nic}
               logo={logo}
               onError={"Not a valid wallet ID"}
-              />
+            />
           </View>
-      </View>
+        </View>
       </TouchableWithoutFeedback>
     </Card>
   );
-  };
+};
 
 export default qrCard;

@@ -68,7 +68,7 @@ const {signup}= useAuthentication();
         styles={{ container: "px-3 ", label: "" }}
       ></FormField>
       <View className="my-1 flex justify-start">
-        <TouchableOpacity className="bg-sky-700 w-24 flex justify-center items-center px-5 py-1 rounded-sm "><Text className="text-slate-300">Send code</Text></TouchableOpacity>
+        <TouchableOpacity className="bg-primary-blue w-24 flex justify-center items-center px-5 py-1 rounded-sm "><Text className="text-slate-300">Send code</Text></TouchableOpacity>
         {/* <Text className="text-slate-500 text-xs">
           By clicking Sign up, you agree to our terms and conditions
         </Text> */}

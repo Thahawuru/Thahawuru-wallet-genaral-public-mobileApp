@@ -47,6 +47,10 @@ export const AuthProvider = ({ children }) => {
             type: "LOGIN",
             payload: JSON.parse(user),
           });
+        }else{
+            dispatch({
+                type: "LOGOUT",
+              });
         }
       } catch (error) {
         console.error("Failed to load user", error);

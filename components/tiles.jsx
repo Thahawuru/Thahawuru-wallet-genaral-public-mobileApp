@@ -4,6 +4,7 @@ import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import Card from "../components/UI/customCard";
 
+
 const tiles = () => {
   return (
     <View className="w-full  flex justify-around flex-row items-center">
@@ -20,6 +21,9 @@ const tiles = () => {
         color="silver"
         href="/home"
       ></Tile>
+
+  
+      
     </View>
   );
 };

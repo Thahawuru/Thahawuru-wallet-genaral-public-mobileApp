@@ -7,8 +7,10 @@ import Card from "../../components/UI/customCard";
 import QRCode from "react-native-qrcode-svg";
 import logo from "../../assets/images/tahauru-logo.png";
 import ViewShot from "react-native-view-shot";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const qrpage = () => {
+  const { user } = useAuthContext();
   const wallet = "this-is-tahauru-wallet-id";
   const isPresented = router.canGoBack();
   return (
@@ -26,7 +28,7 @@ const qrpage = () => {
                 >
                   <QRCode
                     size={300}
-                    value={wallet}
+                    value={user.nic}
                     logo={logo}
                     onError={"Not a valid wallet ID"}
                   />

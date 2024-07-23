@@ -1,6 +1,6 @@
 import { View, Text, StatusBar } from "react-native";
 import React from "react";
-import { Tabs, Redirect } from "expo-router";
+import { Tabs } from "expo-router";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 // import { faHouse } from "@fortawesome/free-solid-svg-icons/faHouse";
 // import { faUser } from "@fortawesome/free-solid-svg-icons/faUser";
@@ -46,6 +46,7 @@ const TabsLayout = () => {
             height: 55,
           },
         }}
+        initialRouteName="home"
       >
         <Tabs.Screen
           name="home"
@@ -131,6 +132,15 @@ const TabsLayout = () => {
           options={{
             title: "Scan",
             headerShown: false,
+            href: null,
+            presentation: "modal",
+          }}
+        />
+        <Tabs.Screen
+          name="(settings)"
+          options={{
+            title: "settings",
+            headerShown: true,
             href: null,
             presentation: "modal",
           }}

@@ -1,44 +1,43 @@
-import { View, Text,Keyboard } from "react-native";
-import {useState} from "react";
+import { View, Text, Keyboard } from "react-native";
+import { useState } from "react";
 import FormField from "./formfield";
 import CustomButton from "./UI/customButton";
 import { router } from "expo-router";
 import { useTranslation } from "react-i18next";
-import {useAuthentication} from "../api/useAuthentication"
+import { useAuthentication } from "../api/useAuthentication";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import { useAuthContext } from "@/hooks/useAuthContext";
 
 const signinform = () => {
-const [password,setPassword]=useState('');
-const [email,setEmail]=useState('');
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const { dispatch } = useAuthContext();
 
+  const { signin } = useAuthentication();
+  const { t } = useTranslation();
 
-const {signin}=useAuthentication();
-const {t}=useTranslation();
+  const handlePasswordChange = (value) => {
+    setPassword(value);
+  };
 
-const handlePasswordChange = (value) => {
-setPassword(value);
-};
+  const handleEmailChange = (value) => {
+    setEmail(value);
+  };
 
-
-const handleEmailChange = (value) => {
-setEmail(value);
-};
-
-  const submit = async() => {
+  const submit = async () => {
     Keyboard.dismiss();
     try {
-      const response = await signin({email,password});
-      if(response.status===200){
+      const response = await signin({ email, password });
+      if (response.status === 200) {
         alert("Login Successfull");
-        AsyncStorage.setItem("user",JSON.stringify(response.data.data.user));
+        dispatch({ type: "LOGIN", payload: response.data.data.user });
+        AsyncStorage.setItem("user", JSON.stringify(response.data.data.user));
         router.push("/home");
       }
-    }catch(error){
-alert(error.message);
-  
+    } catch (error) {
+      alert(error.message);
+    }
   };
-};
 
   return (
     <View className="w-full flex flex-col justify-center">
@@ -54,8 +53,8 @@ alert(error.message);
         placeholder={t("password")}
         styles={{ container: "px-3 ", label: "" }}
       ></FormField>
-      <View className='mt-4'>
-      <CustomButton title={t("signin")} handelPress={submit}></CustomButton>
+      <View className="mt-4">
+        <CustomButton title={t("signin")} handelPress={submit}></CustomButton>
       </View>
     </View>
   );

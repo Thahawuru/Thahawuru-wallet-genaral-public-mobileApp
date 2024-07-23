@@ -9,17 +9,14 @@ import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
 const LanguageSwitcher = () => {
   const [language, setLanguage] = useState("");
 
-
   const getLanguage = async () => {
-    const savedLanguage = await AsyncStorage.getItem('language') || 'en';
+    const savedLanguage = (await AsyncStorage.getItem("language")) || "en";
     setLanguage(savedLanguage);
   };
 
   useEffect(() => {
-getLanguage();
-  },[]);
-
-
+    getLanguage();
+  }, []);
 
   const switchLanguage = async (lng) => {
     await AsyncStorage.setItem("language", lng);
@@ -29,11 +26,14 @@ getLanguage();
 
   return (
     <View
-      style={{
-        flexDirection: "row",
-        justifyContent: "space-around",
-        padding: 10,
-      }}    
+      style={
+        {
+          // flexDirection: "row",
+          // justifyContent: "space-around",
+          // padding: 10,
+        }
+      }
+      className=""
     >
       {language === "en" && (
         <TouchableOpacity
@@ -45,7 +45,11 @@ getLanguage();
         </TouchableOpacity>
       )}
       {language === "si" && (
-        <TouchableOpacity className="bg-slate-200 flex justify-center items-center h-9 w-16  rounded-sm " title="English" onPress={() => switchLanguage("en")}>
+        <TouchableOpacity
+          className="bg-slate-200 flex justify-center items-center h-9 w-16  rounded-sm "
+          title="English"
+          onPress={() => switchLanguage("en")}
+        >
           <Text className="text-slate-500">English</Text>
         </TouchableOpacity>
       )}
