@@ -5,9 +5,8 @@ import userphoto from "../../assets/images/userphoto.jpg";
 import { MaterialIcons } from "@expo/vector-icons";
 import Tag from "../itemTag";
 
-const nicCard = ({nic}) => {
+const officerDetails = ({officerDetails}) => {
   const [show, setShow] = useState(false);
-  console.log(nic);
 
 
   return (
@@ -16,21 +15,18 @@ const nicCard = ({nic}) => {
         <View className="flex flex-row justify-between items-center gap-1 w-full">
           <View className="flex-[3_1_0%] flex justify-start items-start">
             <Text className="text-lg font-semibold">
-              National Identity Card
+              Officer Details
             </Text>
-            {!show  && <Text className="text-md font-semibold">NIC : {nic.no}</Text>}
+            {!show  && <Text className="text-md font-semibold">Name : {officerDetails.name}</Text>}
             {!show  && <Text className="text-xs font-thin">Tap to view details</Text>}
 
             {show && (
               <View>
-                <Tag title="NIC"> {nic.nic}</Tag>
-                <Tag title="Name"> {nic.name}</Tag>
-                <Tag title="Email"> {nic.email}</Tag>
-                <Tag title="Sex"> {nic.sex}</Tag>
-                <Tag title="Date of Birth"> {nic.dob}</Tag>
-                <Tag title="Address"> {nic.address}</Tag>
-                <Tag title="Place of Birth"> {nic.pob}</Tag>
-                <Tag title="Date of Issue"> {nic.doi}</Tag>
+                <Tag title="name"> {officerDetails.name}</Tag>
+                <Tag title="station"> {officerDetails.station}</Tag>
+                <Tag title="rank"> {officerDetails.rank}</Tag>
+                <Tag title="mobile"> {officerDetails.mobile}</Tag>
+                <Tag title="email"> {officerDetails.email}</Tag>
               </View>
             )}
           </View>
@@ -56,4 +52,4 @@ const nicCard = ({nic}) => {
   );
 };
 
-export default nicCard;
+export default officerDetails;

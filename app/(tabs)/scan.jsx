@@ -11,6 +11,7 @@ export default function App() {
   const [scanned, setScanned] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [scannedData, setScannedData] = useState("");
+  const [scannedToken, setScannedToken] = useState("");
   const [verified, setVerified] = useState(false);
 
   useEffect(() => {
@@ -29,6 +30,7 @@ export default function App() {
       setScannedData(
         `Wallet ID ${data} has been scanned!`
       );
+      setScannedToken(data);
     setVerified(true)
     }
     setModalVisible(true);
@@ -41,7 +43,7 @@ export default function App() {
   const handleActionModal = () => {
     setModalVisible(false);
     setScanned(false);
-    router.push('/scandetails');
+    router.push(`/scanview/${scannedToken}`);
 
   };
 
