@@ -11,7 +11,6 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 
 const qrpage = () => {
   const { user } = useAuthContext();
-  const wallet = "this-is-tahauru-wallet-id";
   const isPresented = router.canGoBack();
   return (
     <SafeAreaView>
@@ -28,7 +27,7 @@ const qrpage = () => {
                 >
                   <QRCode
                     size={300}
-                    value={user.nic}
+                    value={user?.nic}
                     logo={logo}
                     onError={"Not a valid wallet ID"}
                   />
