@@ -7,8 +7,10 @@ import { useTranslation } from "react-i18next";
 import { useAuthentication } from "../api/useAuthentication";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useAuthContext } from "@/hooks/useAuthContext";
+import { useToastContext } from "@/hooks/useToastContext";
 
 const signinform = () => {
+  const { showToast } = useToastContext();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const { dispatch } = useAuthContext();
@@ -29,14 +31,14 @@ const signinform = () => {
     try {
       const response = await signin({ email, password });
       if (response.status === 200) {
-        alert("Login Successfull");
+        showToast({ type: "success", text: "Login Success" });
         dispatch({ type: "LOGIN", payload: response.data.data.user });
         AsyncStorage.setItem("user", JSON.stringify(response.data.data.user));
         AsyncStorage.setItem("token", JSON.stringify(response.data.data.token));
         router.push("/home");
       }
     } catch (error) {
-      alert(error.message);
+      showToast({ type: "danger", text: "Login Failed" });
     }
   };
 
