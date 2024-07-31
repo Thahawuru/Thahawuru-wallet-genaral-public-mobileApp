@@ -12,6 +12,7 @@ import { I18nextProvider } from "react-i18next";
 import { AuthProvider } from "../context/authContext";
 import { useAuthContext } from "@/hooks/useAuthContext";
 import { ScanProvider } from "../context/scanContext";
+import { ToastProvider } from "../context/toastContext";
 
 library.add(fab, faSquareCheck);
 
@@ -39,14 +40,16 @@ export default function RootLayout() {
     <>
       <AuthProvider>
         <ScanProvider>
-          <I18nextProvider i18n={i18n}>
-            <Stack screenOptions={{ headerShown: false }}>
-              <Stack.Screen
-                name="index"
-                options={{ headerShown: false }}
-              ></Stack.Screen>
-            </Stack>
-          </I18nextProvider>
+          <ToastProvider>
+            <I18nextProvider i18n={i18n}>
+              <Stack screenOptions={{ headerShown: false }}>
+                <Stack.Screen
+                  name="index"
+                  options={{ headerShown: false }}
+                ></Stack.Screen>
+              </Stack>
+            </I18nextProvider>
+          </ToastProvider>
         </ScanProvider>
       </AuthProvider>
     </>

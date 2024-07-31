@@ -5,41 +5,44 @@ import { useCards } from "../../api/useCards";
 import userphoto from "../../assets/images/userphoto.jpg";
 import Tag from "../itemTag";
 import { Ionicons } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 
 const passportCard = () => {
   const { getDrivingLicence } = useCards();
   const [show, setShow] = useState(false);
   const license = getDrivingLicence();
 
+  const {t}=useTranslation();
+
   return (
     <Card color={"#fff"}>
       <TouchableWithoutFeedback onPress={() => setShow((show) => !show)}>
         <View className="flex flex-row justify-between items-center ">
           <View>
-            <Text className="text-lg font-semibold">Driving Licence</Text>
+            <Text className="text-lg font-semibold">{t("DringLicense")}</Text>
             {!show && (
               <Text className="text-md font-semibold">
-                Licence No : {license?.no}
+                {t("licenseNo")} : {license?.no}
               </Text>
             )}
             {!show && (
-              <Text className="text-xs font-thin">Tap to view details</Text>
+              <Text className="text-xs font-thin">{t("details")}</Text>
             )}
 
             {show && (
               <View>
-                <Tag title="No"> {license.no}</Tag>
-                <Tag title="Name"> {license.name}</Tag>
-                <Tag title="Date of Birth"> {license.dob}</Tag>
-                <Tag title="Date of Issue"> {license.doi}</Tag>
-                <Tag title="Date of Expiary"> {license.doe}</Tag>
-                <Tag title="Blood Group"> {license.bloodGroup}</Tag>
+                <Tag title={t("No")}> {license.no}</Tag>
+                <Tag title={t("name")}> {license.name}</Tag>
+                <Tag title={t("DOB")}> {license.dob}</Tag>
+                <Tag title={t("DOI")}> {license.doi}</Tag>
+                <Tag title={t("DOE")}> {license.doe}</Tag>
+                <Tag title={t("Blood")}> {license.bloodGroup}</Tag>
                 {license.restrictions && (
-                  <Tag title="Restrictions">
+                  <Tag title={t("restrictions")}>
                     <Ionicons size={24} name="glasses-outline"></Ionicons>
                   </Tag>
                 )}
-                <Tag title="Vehicle Categories">
+                <Tag title={t("vehicleC")}>
                   {" "}
                   {license.categories.join(", ")}
                 </Tag>
