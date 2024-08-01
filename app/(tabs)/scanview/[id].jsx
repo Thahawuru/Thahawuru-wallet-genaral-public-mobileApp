@@ -9,6 +9,7 @@ import { useCards } from "@/api/useCards";
 import { useQr } from "@/api/useQr";
 import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
 import { useLocalSearchParams } from "expo-router";
+import { useScanContext } from "../../../hooks/useScanContext";
 
 const scandetails = () => {
   const { id } = useLocalSearchParams();
@@ -16,23 +17,11 @@ const scandetails = () => {
   const { getQrDetails } = useQr();
   const [qrDetails, setQrDetails] = useState([]);
 
-  const getQrInfo = async () => {
-    try {
-      console.log(id);
-      const response = await getQrDetails(id);
-      setQrDetails(response.data.data);
-      console.log(response.data.data);
-    } catch (error) {
-      alert(error.message);
-    }
-  };
+  const {data}=useScanContext();
+  console.log("DATA",data.licenceDetails);
 
-  useEffect(() => {
-    getQrInfo();
-  }, []);
 
-  const nic = getNIC();
-  const license = getDrivingLicence();
+  // const nic = getNIC();
   const passport = getPassport();
   return (
     <SafeAreaView>
@@ -42,10 +31,10 @@ const scandetails = () => {
             <Header back={true} title={"Scanned Wallet"}></Header>
           </View>
           <View className="w-[90%]">
-            <NIC nic={qrDetails}></NIC>
+            <NIC nic={data?.nicDetails}></NIC>
           </View>
           <View className="w-[90%] ">
-            <DrivingLicence license={license}></DrivingLicence>
+            <DrivingLicence license={data?.licenceDetails}></DrivingLicence>
           </View>
           <View className="w-[90%] ">
             <Passport passport={passport}></Passport>

@@ -7,10 +7,10 @@ import Tag from "../itemTag";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 
-const passportCard = () => {
-  const { getDrivingLicence } = useCards();
+const passportCard = ({license}) => {
+  // const { getDrivingLicence } = useCards();
   const [show, setShow] = useState(false);
-  const license = getDrivingLicence();
+  // const license = getDrivingLicence();
 
   const {t}=useTranslation();
 
@@ -22,7 +22,7 @@ const passportCard = () => {
             <Text className="text-lg font-semibold">{t("DringLicense")}</Text>
             {!show && (
               <Text className="text-md font-semibold">
-                {t("licenseNo")} : {license?.no}
+                {t("licenseNo")} : {license?.licenseNumber}
               </Text>
             )}
             {!show && (
@@ -31,20 +31,20 @@ const passportCard = () => {
 
             {show && (
               <View>
-                <Tag title={t("No")}> {license.no}</Tag>
-                <Tag title={t("name")}> {license.name}</Tag>
-                <Tag title={t("DOB")}> {license.dob}</Tag>
-                <Tag title={t("DOI")}> {license.doi}</Tag>
-                <Tag title={t("DOE")}> {license.doe}</Tag>
-                <Tag title={t("Blood")}> {license.bloodGroup}</Tag>
-                {license.restrictions && (
+                <Tag title={t("No")}> {license?.licenseNumber}</Tag>
+                <Tag title={t("name")}> {license?.name}</Tag>
+                <Tag title={t("DOB")}> {"2000-07-21"}</Tag>
+                <Tag title={t("DOI")}> {"2021-01-10"}</Tag>
+                <Tag title={t("DOE")}> {"2031-01-10"}</Tag>
+                <Tag title={t("Blood")}> {"A+"}</Tag>
+                {license?.restrictions && (
                   <Tag title={t("restrictions")}>
                     <Ionicons size={24} name="glasses-outline"></Ionicons>
                   </Tag>
                 )}
                 <Tag title={t("vehicleC")}>
                   {" "}
-                  {license.categories.join(", ")}
+                  {license?.categories?.join(", ")}
                 </Tag>
               </View>
             )}
