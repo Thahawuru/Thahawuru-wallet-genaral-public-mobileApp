@@ -5,9 +5,11 @@ import CustomButton from "./UI/customButton";
 import { router } from "expo-router";
 import { useAuthentication } from "../api/useAuthentication";
 import { useTranslation } from "react-i18next";
+import { useToastContext } from "@/hooks/useToastContext";
 
 
 const signupform = ({nic,securitykey}) => {
+  const  {showToast}=useToastContext();
 const [password,setPassword]=useState('');
 const [passwordConfirm,setPasswordConfirm]=useState('');
 const [email,setEmail]=useState('');
@@ -25,11 +27,11 @@ const {signup}= useAuthentication();
         try{
             const response=await signup({email,password,OTP,nic:nic,securitykey:securitykey});
             if(response.status===201){
-                alert("Signup Successfull");
+                showToast({type:"success",text:"Signup Success"});
                 router.push("/signin");
             }
         }catch(error){
-          alert(error.message)
+          showToast({type:"danger",text:"Signup Failed"});
 
         }
   
