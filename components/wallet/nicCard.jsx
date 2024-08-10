@@ -6,11 +6,9 @@ import { MaterialIcons } from "@expo/vector-icons";
 import Tag from "../itemTag";
 import { useTranslation } from "react-i18next";
 
-const nicCard = ({nic}) => {
+const nicCard = ({ nic }) => {
+  const { t } = useTranslation();
   const [show, setShow] = useState(false);
-  console.log(nic);
-
-  const {t} = useTranslation();
 
 
   return (
@@ -18,22 +16,25 @@ const nicCard = ({nic}) => {
       <TouchableWithoutFeedback onPress={() => setShow((show) => !show)}>
         <View className="flex flex-row justify-between items-center gap-1 w-full">
           <View className="flex-[3_1_0%] flex justify-start items-start">
-            <Text className="text-lg font-semibold">
-              {t("NIC")}
-            </Text>
-            {!show  && <Text className="text-md font-semibold">{t("nic")}{nic.no}</Text>}
-            {!show  && <Text className="text-xs font-thin">{t("details")}</Text>}
+            <Text className="text-lg font-semibold">{t("NIC")}</Text>
+            {!show && (
+              <Text className="text-md font-semibold">
+                {t("nic")}
+                {nic?.identityNumber}
+              </Text>
+            )}
+            {!show && <Text className="text-xs font-thin">{t("details")}</Text>}
 
             {show && (
               <View>
-                <Tag title={t("nic2")}> {nic.nic}</Tag>
-                <Tag title={t("name")}> {nic.name}</Tag>
-                <Tag title={t("email")}> {nic.email}</Tag>
-                <Tag title={t("sex")}> {nic.sex}</Tag>
-                <Tag title={t("DOB")}> {nic.dob}</Tag>
-                <Tag title={t("address")}> {nic.address}</Tag>
-                <Tag title={t("placeOfBirth")}> {nic.pob}</Tag>
-                <Tag title={t("DOI")}> {nic.doi}</Tag>
+                <Tag title={t("nic2")}> {nic?.identityNumber}</Tag>
+                <Tag title={t("name")}> {nic?.name}</Tag>
+                {/* <Tag title="Email"> {nic.email}</Tag>
+                <Tag title="Sex"> {nic.sex}</Tag> */}
+                <Tag title={t("DOB")}> {nic?.dob}</Tag>
+                <Tag title="Address"> {nic?.livingAddress}</Tag>
+                <Tag title="Place of Birth"> {nic?.birthPlace}</Tag>
+                <Tag title="Date of Issue"> {nic?.doi}</Tag>
               </View>
             )}
           </View>

@@ -5,14 +5,23 @@ import CameraOverlay from "../../components/UI/cameraOverlay";
 import CustomButton from "../../components/UI/customButton";
 import CustomModal from "../../components/UI/modal";
 import { router } from "expo-router";
+import { useQr } from "@/api/useQr";
+import {useScanContext} from "@/hooks/useScanContext";
 
 export default function App() {
+  const { getQrDetails } = useQr();
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [scannedData, setScannedData] = useState("");
   const [scannedToken, setScannedToken] = useState("");
   const [verified, setVerified] = useState(false);
+  const [isloading, setIsloading] = useState(false);
+  const [iserror, setIserror] = useState(false);
+
+  const {data,dispatch} = useScanContext();
+
+  
 
   useEffect(() => {
     const getCameraPermissions = async () => {
@@ -23,17 +32,34 @@ export default function App() {
     getCameraPermissions();
   }, []);
 
-  const handleBarCodeScanned = ({ type, data }) => {
+  const handleBarCodeScanned = async ({ type, data }) => {
     setScanned(true);
     // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-    if(data){
-      setScannedData(
-        `Wallet ID ${data} has been scanned!`
-      );
-      setScannedToken(data);
-    setVerified(true)
+    if (data) {
+      setModalVisible(true);
+      setScannedData(`Verifing User!`);
+      setIsloading(true);
+      try {
+        const response = await getQrDetails(data);
+        // setQrDetails(response.data.data);
+        if(response.status === 200){
+          setScannedData(`Verified Wallet Found!`);
+          setIsloading(false);
+          setIserror(false);
+          setVerified(true);
+          setScannedToken(data);
+          dispatch({type:"SCAN",payload:response.data.data.userDetails});
+        }else{
+
+          setIserror(true);
+          setScannedData(`No valid user found!`);
+        }
+      } catch (error) {
+        setIserror(true);
+        setScannedData(`failed to load data`);
+        // alert(error.message);
+      }
     }
-    setModalVisible(true);
   };
   const handleCloseModal = () => {
     setModalVisible(false);
@@ -44,7 +70,6 @@ export default function App() {
     setModalVisible(false);
     setScanned(false);
     router.push(`/scanview/${scannedToken}`);
-
   };
 
   if (hasPermission === null) {
@@ -56,34 +81,35 @@ export default function App() {
 
   return (
     <TouchableWithoutFeedback onPress={handleCloseModal}>
-
-    <View className=" relative flex flex-1 justify-center items-center ">
-      <CameraView
-        onBarcodeScanned={scanned ? undefined : handleBarCodeScanned}
-        barcodeScannerSettings={{
-          barcodeTypes: ["qr", "pdf417"],
+      <View className=" relative flex flex-1 justify-center items-center ">
+        <CameraView
+          onBarcodeScanned={scanned ? undefined : handleBarCodeScanned}
+          barcodeScannerSettings={{
+            barcodeTypes: ["qr", "pdf417"],
           }}
           style={StyleSheet.absoluteFillObject}
-          />
-      <CameraOverlay title="Scan Wallet ID" />
-      <CustomModal
-        visible={modalVisible}
-        onClose={handleCloseModal}
-        onAction={handleActionModal}
-        verified={verified}
-        title={scannedData}
+        />
+        <CameraOverlay title="Scan Wallet ID" />
+        <CustomModal
+          visible={modalVisible}
+          onClose={handleCloseModal}
+          onAction={handleActionModal}
+          verified={verified}
+          loading={isloading}
+          error={iserror}
+          title={scannedData}
         ></CustomModal>
 
-      {scanned && (
-        // <Button title={"Tap to Scan Again"} onPress={() => setScanned(false)} />
-        <View className="absolute bottom-[10%] w-full flex justify-center items-center">
-          <CustomButton
-            title="Scan Again"
-            handelPress={() => setScanned(false)}
+        {scanned && (
+          // <Button title={"Tap to Scan Again"} onPress={() => setScanned(false)} />
+          <View className="absolute bottom-[10%] w-full flex justify-center items-center">
+            <CustomButton
+              title="Scan Again"
+              handelPress={() => setScanned(false)}
             />
-        </View>
-      )}
-    </View>
+          </View>
+        )}
+      </View>
     </TouchableWithoutFeedback>
   );
 }

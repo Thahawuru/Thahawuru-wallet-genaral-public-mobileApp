@@ -1,10 +1,9 @@
 import axios from "axios";
 import apiClient from "./apiClient";
 
-
-
 export const useQr = () => {
   const getQrDetails = async (data) => {
+
     try {
       const response = await apiClient.get(`/qr/${data}`);
       return response;
