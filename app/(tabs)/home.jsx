@@ -1,11 +1,10 @@
-import { View, Text, ScrollView ,Image} from "react-native";
+import { View, Text, ScrollView, Image } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "../../components/header";
 import ProfileCard from "../../components/profileCard";
 import QRCard from "../../components/qrCard";
 import Tiles from "../../components/tiles";
-
 
 const home = () => {
   return (
@@ -21,7 +20,7 @@ const home = () => {
           <View className="w-[90%] mt-5 -translate-y-10">
             <QRCard></QRCard>
           </View>
-          <View className="w-[90%] mt-20 -translate-y-10">
+          <View className="w-[90%]  mt-20 -translate-y-10">
             <Tiles></Tiles>
           </View>
         </View>

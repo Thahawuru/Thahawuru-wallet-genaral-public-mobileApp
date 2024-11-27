@@ -10,14 +10,14 @@ import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 const TabIcon = ({ icon, name, focused, customStyle }) => {
   return (
     <View
-      className=" flex justify-center items-center flex-col"
+      className=" flex justify-center  items-center flex-col"
       style={customStyle?.container}
     >
       <View style={customStyle?.containerIcon}>
         <MaterialIcons
           name={icon}
           color={focused ? "#003566" : name === "Scan" ? "white" : "grey"}
-          className="W-20 h-20"
+          className="W-10 h-10"
           size={customStyle?.icon.size || 25}
           style={customStyle?.icon}
         ></MaterialIcons>
@@ -26,7 +26,7 @@ const TabIcon = ({ icon, name, focused, customStyle }) => {
         <Text
           className={`${
             focused ? "text-blue-700" : "text-slate-500"
-          } uppercase text-xs`}
+          } uppercase text-xs w-full`}
         >
           {name}
         </Text>
@@ -79,15 +79,15 @@ const TabsLayout = () => {
                     height: 70,
                     width: 70,
                     display: "flex",
-                    justifyContent: "center",
+                    justifyContent: "flex-start",
                     alignItems: "center",
                   },
                   container: {
-                    transform: [{ translateY: -22 }],
+                    transform: [{ translateY: -20 }],
                     // borderRadius: 55,
                     // borderWidth: 2,
                     // borderColor: "red",
-                    padding: 10,
+                    padding: 5,
                   },
                   icon: {
                     size: 35,

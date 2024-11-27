@@ -1,17 +1,19 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode:"class",
   content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
+  presets: [require("nativewind/preset")],
   theme: {
     extend: {
       fontFamily: {
-        SpaceMono: [ "monospace"],
-      },      
+        SpaceMono: ["monospace"],
+      },
       colors: {
-        'primary-blue': '#010177df', // Example default color
+        "primary-blue": "#0F0D4B",
+        "secondry-blue": "#0F0D4B",
+        "secondry-1": "#0F0D4B",
+        "secondry-2": "#EBF5FF",
       },
     },
   },
   plugins: [],
-}
-
+};

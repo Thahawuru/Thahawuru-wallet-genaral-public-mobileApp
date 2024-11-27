@@ -13,6 +13,7 @@ import { AuthProvider } from "../context/authContext";
 import { useAuthContext } from "@/hooks/useAuthContext";
 import { ScanProvider } from "../context/scanContext";
 import { ToastProvider } from "../context/toastContext";
+import "../global.css";
 
 library.add(fab, faSquareCheck);
 

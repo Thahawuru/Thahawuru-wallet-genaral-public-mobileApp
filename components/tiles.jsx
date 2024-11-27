@@ -5,18 +5,17 @@ import { MaterialIcons } from "@expo/vector-icons";
 import Card from "../components/UI/customCard";
 import { useTranslation } from "react-i18next";
 
-
 const tiles = () => {
-
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   return (
-    <View className="w-full  flex justify-around flex-row items-center">
-      <Tile 
-      title={t("wallet")}
-      icon="wallet" 
-      color="orange" 
-      href="/profile"></Tile>
+    <View className="w-full flex justify-around flex-row items-center">
+      <Tile
+        title={t("wallet")}
+        icon="wallet"
+        color="orange"
+        href="/profile"
+      ></Tile>
       <Tile
         title={t("contact")}
         icon="contact-support"
@@ -29,9 +28,6 @@ const tiles = () => {
         color="silver"
         href="/home"
       ></Tile>
-
-  
-      
     </View>
   );
 };
@@ -40,7 +36,7 @@ export default tiles;
 
 const Tile = ({ title, href, icon, color }) => {
   return (
-    <Link href={href} className="">
+    <Link href={href} className="max-w-[30%]">
       <Card color="#fff">
         <View className="flex justify-center items-center">
           <MaterialIcons name={icon} color={color} size={35}></MaterialIcons>

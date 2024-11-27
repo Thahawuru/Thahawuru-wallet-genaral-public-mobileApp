@@ -1,0 +1,13 @@
+{
+  "folders": [
+	{
+		"name": "wallet-app",
+		"path": "."
+	},
+	{
+		"name": "context",
+		"path": "../Thahawuru-wallet-genaral-public-mobileApp/Thahawuru-wallet-genaral-public-mobileApp/context"
+	}
+],
+  "settings": {}
+}
