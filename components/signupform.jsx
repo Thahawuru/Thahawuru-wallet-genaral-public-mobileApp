@@ -13,7 +13,6 @@ const signupform = ({ nic, securitykey }) => {
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [email, setEmail] = useState("");
   const [OTP, setOTP] = useState("");
-
   const { t } = useTranslation();
 
   const { signup } = useAuthentication();

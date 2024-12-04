@@ -20,7 +20,9 @@ const scandetails = () => {
   const {data}=useScanContext();
 
 
+
   const nic = getNIC();
+
   const passport = getPassport();
   return (
     <SafeAreaView>

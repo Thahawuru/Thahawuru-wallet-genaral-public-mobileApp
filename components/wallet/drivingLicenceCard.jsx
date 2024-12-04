@@ -11,8 +11,6 @@ const passportCard = ({licence}) => {
   const {t} =useTranslation();
   const { getDrivingLicence } = useCards();
   const [show, setShow] = useState(false);
-
-
   return (
     <Card color={"#fff"}>
       <TouchableWithoutFeedback onPress={() => setShow((show) => !show)}>

@@ -9,8 +9,7 @@ import { useTranslation } from "react-i18next";
 const nicCard = ({ nic }) => {
   const { t } = useTranslation();
   const [show, setShow] = useState(false);
-
-
+  
   return (
     <Card color={"#fff"}>
       <TouchableWithoutFeedback onPress={() => setShow((show) => !show)}>
@@ -24,7 +23,6 @@ const nicCard = ({ nic }) => {
               </Text>
             )}
             {!show && <Text className="text-xs font-thin">{t("details")}</Text>}
-
             {show && (
               <View>
                 <Tag title={t("nic2")}> {nic?.identityNumber}</Tag>
