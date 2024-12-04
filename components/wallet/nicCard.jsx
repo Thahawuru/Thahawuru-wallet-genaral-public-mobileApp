@@ -6,34 +6,33 @@ import { MaterialIcons } from "@expo/vector-icons";
 import Tag from "../itemTag";
 import { useTranslation } from "react-i18next";
 
-const nicCard = ({nic}) => {
+const nicCard = ({ nic }) => {
+  const { t } = useTranslation();
   const [show, setShow] = useState(false);
-
-
-  const {t} = useTranslation();
-
-
+  
   return (
     <Card color={"#fff"}>
       <TouchableWithoutFeedback onPress={() => setShow((show) => !show)}>
         <View className="flex flex-row justify-between items-center gap-1 w-full">
           <View className="flex-[3_1_0%] flex justify-start items-start">
-            <Text className="text-lg font-semibold">
-              {t("NIC")}
-            </Text>
-            {!show  && <Text className="text-md font-semibold">{t("nic")}{nic?.identityNumber}</Text>}
-            {!show  && <Text className="text-xs font-thin">{t("details")}</Text>}
-
+            <Text className="text-lg font-semibold">{t("NIC")}</Text>
+            {!show && (
+              <Text className="text-md font-semibold">
+                {t("nic")}
+                {nic?.identityNumber}
+              </Text>
+            )}
+            {!show && <Text className="text-xs font-thin">{t("details")}</Text>}
             {show && (
               <View>
                 <Tag title={t("nic2")}> {nic?.identityNumber}</Tag>
                 <Tag title={t("name")}> {nic?.name}</Tag>
-                {/* <Tag title={t("email")}> {nic?.email}</Tag> */}
-                <Tag title={t("sex")}> {"male"}</Tag>
-                <Tag title={t("DOB")}> {"2001-06-25"}</Tag>
-                <Tag title={t("address")}> {nic?.livingAddress}</Tag>
-                <Tag title={t("placeOfBirth")}> {nic?.birthPlace}</Tag>
-                <Tag title={t("DOI")}> {"2010-07-21"}</Tag>
+                {/* <Tag title="Email"> {nic.email}</Tag>
+                <Tag title="Sex"> {nic.sex}</Tag> */}
+                <Tag title={t("DOB")}> {nic?.dob}</Tag>
+                <Tag title="Address"> {nic?.livingAddress}</Tag>
+                <Tag title="Place of Birth"> {nic?.birthPlace}</Tag>
+                <Tag title="Date of Issue"> {nic?.doi}</Tag>
               </View>
             )}
           </View>

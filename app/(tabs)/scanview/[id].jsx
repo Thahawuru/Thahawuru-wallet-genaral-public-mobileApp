@@ -18,10 +18,11 @@ const scandetails = () => {
   const [qrDetails, setQrDetails] = useState([]);
 
   const {data}=useScanContext();
-  console.log("DATA",data.licenceDetails);
 
 
-  // const nic = getNIC();
+
+  const nic = getNIC();
+
   const passport = getPassport();
   return (
     <SafeAreaView>
@@ -34,7 +35,7 @@ const scandetails = () => {
             <NIC nic={data?.nicDetails}></NIC>
           </View>
           <View className="w-[90%] ">
-            <DrivingLicence license={data?.licenceDetails}></DrivingLicence>
+            <DrivingLicence licence={data?.licenceDetails}></DrivingLicence>
           </View>
           <View className="w-[90%] ">
             <Passport passport={passport}></Passport>

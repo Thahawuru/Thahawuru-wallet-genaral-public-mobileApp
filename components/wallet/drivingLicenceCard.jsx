@@ -7,13 +7,10 @@ import Tag from "../itemTag";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 
-const passportCard = ({license}) => {
-  // const { getDrivingLicence } = useCards();
+const passportCard = ({licence}) => {
+  const {t} =useTranslation();
+  const { getDrivingLicence } = useCards();
   const [show, setShow] = useState(false);
-  // const license = getDrivingLicence();
-
-  const {t}=useTranslation();
-
   return (
     <Card color={"#fff"}>
       <TouchableWithoutFeedback onPress={() => setShow((show) => !show)}>
@@ -22,7 +19,7 @@ const passportCard = ({license}) => {
             <Text className="text-lg font-semibold">{t("DringLicense")}</Text>
             {!show && (
               <Text className="text-md font-semibold">
-                {t("licenseNo")} : {license?.licenseNumber}
+                {t("licenseNo")} : {licence?.no}
               </Text>
             )}
             {!show && (
@@ -31,20 +28,21 @@ const passportCard = ({license}) => {
 
             {show && (
               <View>
-                <Tag title={t("No")}> {license?.licenseNumber}</Tag>
-                <Tag title={t("name")}> {license?.name}</Tag>
-                <Tag title={t("DOB")}> {"2000-07-21"}</Tag>
-                <Tag title={t("DOI")}> {"2021-01-10"}</Tag>
-                <Tag title={t("DOE")}> {"2031-01-10"}</Tag>
-                <Tag title={t("Blood")}> {"A+"}</Tag>
-                {license?.restrictions && (
+                <Tag title={t("No")}> {licence?.licenseNumber}</Tag>
+                <Tag title={t("name")}> {licence?.name}</Tag>
+                <Tag title={t("address")}> {licence?.livingAddress}</Tag>
+                {/* <Tag title="Date of Birth"> {license.dob}</Tag> */}
+                {/* <Tag title="Date of Issue"> {license.doi}</Tag> */}
+                {/* <Tag title="Date of Expiary"> {license.doe}</Tag> */}
+                <Tag title={t("Blood")}> {licence?.blood_grLocalDate}</Tag>
+                {licence?.restrictions && (
                   <Tag title={t("restrictions")}>
                     <Ionicons size={24} name="glasses-outline"></Ionicons>
                   </Tag>
                 )}
                 <Tag title={t("vehicleC")}>
                   {" "}
-                  {license?.categories?.join(", ")}
+                  {licence?.categories?.join(", ")}
                 </Tag>
               </View>
             )}

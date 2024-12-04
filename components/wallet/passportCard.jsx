@@ -8,9 +8,8 @@ import { useTranslation } from "react-i18next";
 
 
 const passportCard = ({passport}) => {
-  const [show, setShow] = useState(false);
-
   const {t} =useTranslation();
+  const [show, setShow] = useState(false);
 
   return (
     <Card color={"#fff"}>
@@ -18,7 +17,7 @@ const passportCard = ({passport}) => {
         <View className="flex flex-row justify-between items-center gap-1 w-full">
           <View className="flex-[3_1_0%] flex justify-start items-start">
             <Text className="text-lg font-semibold">
-            {t("passport")}
+              {t("passport")}
             </Text>
             {!show  && <Text className="text-md font-semibold">{t("passportNo")} : {passport.no}</Text>}
             {!show  && <Text className="text-xs font-thin">{t("details")}</Text>}
